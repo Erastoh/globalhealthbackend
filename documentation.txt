@@ -2,3 +2,6 @@ Install mongoose
 npm install mongoose
 
 --------------------------------
+
+Start mongoose
+brew services start mongodb-community
