@@ -116,7 +116,6 @@ app.put('/users/:id', getUser, async (req, res) => {
 	}
 });
 
-
 app.delete('/users/:id', async (req, res) => {
 	const userId = req.params.id;
 	console.log('Deleting user with ID:', userId);
@@ -133,7 +132,6 @@ app.delete('/users/:id', async (req, res) => {
 		res.status(500).json({ error: 'Internal Server Error' });
 	}
 });
-
 // Middleware function to get user by ID
 async function getUser(req, res, next) {
 	let user;
