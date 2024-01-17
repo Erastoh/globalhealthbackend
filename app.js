@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const app = express();
 const port = 3000;
+const bodyParser = require("body-parser");
 app.use(express.json());
 const { MongoClient } = require('mongodb');
 // Connection to database name
@@ -10,7 +11,8 @@ const dbName = 'globalhealth';
 // Create a new MongoClient
 const client = new MongoClient(url, {});
 const mongoose = require('mongoose');
-const User = require('./Usermodel'); // Assuming the schema is in a separate file
+const User = require('./Usermodel');
+app.use(bodyParser.urlencoded({ extended: true }));// Assuming the schema is in a separate file
 // Connect to MongoDB
 mongoose
 	.connect('mongodb://0.0.0.0:27017/globalhealth', {
@@ -82,7 +84,9 @@ app.get('/users/:id', getUser, (req, res) => {
 app.post('/users', async (req, res) => {
 	const user = new User(req.body);
 	user.save()
-		.then(() => res.status(201).json(user))
+		.then(() =>
+			// res.status(201).json(user))
+			res.status(201).json({ "status": true, "result": 'Edit successful!' }))
 		.catch((err) => {
 			if (err.name === 'ValidationError') {
 				console.error('Validation Error:', err.message);
